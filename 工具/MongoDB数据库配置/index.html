@@ -267,9 +267,58 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        MongoDB数据库配置
+      </label>
+    
     <a href="./" title="MongoDB数据库配置" class="md-nav__link md-nav__link--active">
       MongoDB数据库配置
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mongodb-server" class="md-nav__link">
+    安装MongoDB server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    检查是否启动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    安装管理图形界面
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -380,6 +429,42 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mongodb-server" class="md-nav__link">
+    安装MongoDB server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    检查是否启动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    安装管理图形界面
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -392,6 +477,56 @@
                 
                 
                 <h1 id="mongodb">MongoDB数据库配置<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h1>
+<p>参考内容</p>
+<ul>
+<li><a href="https://www.howtoing.com/how-to-install-mongodb-on-ubuntu-18-04">在Ubuntu上安装MongoDB</a></li>
+<li><a href="https://www.zhihu.com/question/31903748">MongoDB GUI工具</a></li>
+<li><a href="https://blog.csdn.net/github_35160620/article/details/53209324">Pycharm安装插件</a></li>
+</ul>
+<p>操作系统：Ubuntu</p>
+<h2 id="mongodb-server">安装MongoDB server<a class="headerlink" href="#mongodb-server" title="Permanent link">&para;</a></h2>
+<p>在Ubuntu系统安装MongoDB可以使用以下命令</p>
+<div class="codehilite"><pre><span></span><code>sudo apt-get update
+sudo apt-get install mongodb
+</code></pre></div>
+
+<h3 id="_1">检查是否启动<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>sudo systemctl status mongodb
+</code></pre></div>
+
+<p>你会看到这个输出：</p>
+<div class="codehilite"><pre><span></span><code>Output● mongodb.service - An object/document-oriented database
+   Loaded: loaded (/lib/systemd/system/mongodb.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sat 2018-05-26 07:48:04 UTC; 2min 17s ago
+     Docs: man:mongod(1)
+ Main PID: 2312 (mongod)
+    Tasks: 23 (limit: 1153)
+   CGroup: /system.slice/mongodb.service
+           └─2312 /usr/bin/mongod --unixSocketPrefix=/run/mongodb --config /etc/mongodb.conf
+</code></pre></div>
+
+<p>根据<code>systemd</code> ，MongoDB服务器已启动并正在运行。</p>
+<p>我们可以通过实际连接到数据库服务器并执行诊断命令来进一步验证</p>
+<p>执行此命令：</p>
+<div class="codehilite"><pre><span></span><code>mongo --eval <span class="s1">&#39;db.runCommand({ connectionStatus: 1 })&#39;</span>
+</code></pre></div>
+
+<p>这将输出当前的数据库版本，服务器地址和端口以及状态命令的输出：</p>
+<div class="codehilite"><pre><span></span><code><span class="err">OutputMongoDB</span> <span class="err">shell</span> <span class="err">version</span> <span class="err">v</span><span class="mf">3.6</span><span class="err">.</span><span class="mi">3</span>
+<span class="err">connecting</span> <span class="err">to:</span> <span class="err">mongodb://</span><span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">:</span><span class="mi">27017</span>
+<span class="err">MongoDB</span> <span class="err">server</span> <span class="err">version:</span> <span class="mf">3.6</span><span class="err">.</span><span class="mi">3</span>
+<span class="p">{</span>
+        <span class="nt">&quot;authInfo&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;authenticatedUsers&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="p">],</span>
+                <span class="nt">&quot;authenticatedUserRoles&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;ok&quot;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="_2">安装管理图形界面<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>本人使用的是<code>PyCharm</code>的插件进行管理<code>MongoDB Plugin</code></p>
+<p>注意，<code>MongoDB Plugin</code>需要比较高版本的<code>PyCharm</code>才能安装</p>
                 
                   
                 
