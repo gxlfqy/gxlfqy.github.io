@@ -1,0 +1,59 @@
+body {
+    padding: 0;
+    margin: 0;
+    color: #496165;
+}
+
+@font-face {
+    font-family: SAOUI;
+    src: url('SAOUI.ttf');
+}
+
+.box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    font-family: SAOUI;
+}
+
+.box #time {
+    position: absolute;
+    top: 43%;
+    left: 8px;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    font-size: 26px;
+}
+
+.box .img {
+    position: absolute;
+}
+
+.box .rotate {
+    animation: rotate-1 60s linear infinite;
+}
+
+.mid{
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+@keyframes rotate-1 {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
